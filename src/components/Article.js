@@ -1,16 +1,17 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, ListItem } from 'react-native-elements';
 
 export const Article = ({ title }) => (
-  <View style={styles.container}>
-    <Text>{title}</Text>
-  </View>
+  <ListItem.Swipeable
+    bottomDivider
+    rightContent={
+      <Button
+        title="Delete"
+        icon={{ name: 'delete', color: 'white' }}
+        buttonStyle={{ minHeight: '100%', backgroundColor: 'red' }}
+      />
+    }
+  >
+    <ListItem.Title>{title}</ListItem.Title>
+  </ListItem.Swipeable>
 );
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 5,
-    margin: 5,
-    borderBottomWidth: 1,
-  },
-});

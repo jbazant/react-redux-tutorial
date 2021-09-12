@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { ScrollView } from "react-native";
-import { Article } from "./Article";
+import { FlatList } from 'react-native';
+import { Article } from './Article';
 
-// todo flat list!
 export const Articles = () => (
-  <ScrollView>
-    <Article title={"text 1"} />
-    <Article title={"text 1"} />
-    <Article title={"text 1"} />
-  </ScrollView>
+  <FlatList
+    data={[
+      { key: 'a', title: 'item 1' },
+      { key: 'b', title: 'item 2' },
+    ]}
+    renderItem={({item: {title}}) => <Article title={title} />}
+  />
 );
