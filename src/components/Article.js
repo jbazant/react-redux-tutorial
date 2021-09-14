@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, ListItem } from 'react-native-elements';
 
-export const Article = ({ title }) => (
+export const Article = ({ title, index, deleteArticleByIndex }) => (
   <ListItem.Swipeable
     bottomDivider
     rightContent={
@@ -9,6 +9,7 @@ export const Article = ({ title }) => (
         title="Delete"
         icon={{ name: 'delete', color: 'white' }}
         buttonStyle={{ minHeight: '100%', backgroundColor: 'red' }}
+        onPress={() => deleteArticleByIndex(index)}
       />
     }
   >
