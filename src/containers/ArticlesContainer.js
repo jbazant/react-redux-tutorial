@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { Articles } from '../components/Articles';
 import { deleteArticleByIndex } from '../actions/articles';
-import { bindActionCreators } from 'redux';
 
 const articlesListSelector = (articles) =>
   articles.map((article, index) => ({ key: article, title: article, index }));
@@ -12,7 +11,10 @@ function mapStateToProps(state) {
   };
 }
 
-function mapsDispatchToProps(dispatch) {
-  return bindActionCreators({ deleteArticleByIndex }, dispatch);
-}
+// this is equivalent to
+// (dispatch) => bindActionCreators({ deleteArticleByIndex }, dispatch);
+// and
+// (dispatch) => ({ deleteArticleByIndex: (...args) => dispatch(deleteArticleByIndex(...args)) });
+const mapsDispatchToProps = { deleteArticleByIndex };
+
 export const ArticlesContainer = connect(mapStateToProps, mapsDispatchToProps)(Articles);
