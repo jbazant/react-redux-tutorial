@@ -1,26 +1,31 @@
 import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { BottomSheet, Button, Card, Input } from 'react-native-elements';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeNewArticlesForm } from '../actions/articles';
 
-export const NewArticleForm = ({ isVisible, setVisible }) => {
+export const NewArticleForm = () => {
+  const isOpen = useSelector((state) => state.getIn(['form', 'isOpen']));
+  const dispatch = useDispatch();
   return (
-      <BottomSheet
-        isVisible={isVisible}
-        containerStyle={{ backgroundColor: 'rgba(0.5, 0.25, 0, 0.2)' }}
-      >
-        <Card>
-          <Input label="Article" placeholder="Redux is coming!"/>
-          <View style={styles.buttons}>
-            <Button containerStyle={styles.button} title="Add" onPress={() => setVisible(false)} />
-            <Button
-              containerStyle={styles.button}
-              title="Cancel"
-              type="outline"
-              onPress={() => setVisible(false)}
-            />
-          </View>
-        </Card>
-      </BottomSheet>
+    <BottomSheet isVisible={isOpen} containerStyle={{ backgroundColor: 'rgba(0.5, 0.25, 0, 0.2)' }}>
+      <Card>
+        <Input label="Article" placeholder="Redux is coming!" />
+        <View style={styles.buttons}>
+          <Button
+            containerStyle={styles.button}
+            title="Add"
+            onPress={() => dispatch(closeNewArticlesForm())}
+          />
+          <Button
+            containerStyle={styles.button}
+            title="Cancel"
+            type="outline"
+            onPress={() => dispatch(closeNewArticlesForm())}
+          />
+        </View>
+      </Card>
+    </BottomSheet>
   );
 };
 

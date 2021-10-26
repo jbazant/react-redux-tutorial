@@ -1,10 +1,13 @@
 import { Button, Card, Text } from 'react-native-elements';
 import { StyleSheet, View } from 'react-native';
 import React from 'react';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
+import { openNewArticlesForm } from '../actions/articles';
 
-export const SummaryCard = ({ setFormVisible }) => {
-  const articlesCount = useSelector((state) => state.articles.length);
+export const SummaryCard = () => {
+  const articlesCount = useSelector((state) => state.get('articles').size);
+  //const duplicatesCount = useSelector((state) => state.articles).reduce((duplicatesCount,title)=>{});
+  const dispatch = useDispatch();
   return (
     <Card>
       <View style={styles.stats}>
@@ -12,7 +15,7 @@ export const SummaryCard = ({ setFormVisible }) => {
         <Text>Duplicates: 0</Text>
       </View>
       <Card.Divider />
-      <Button title="Add article" onPress={() => setFormVisible(true)} />
+      <Button title="Add article" onPress={() => dispatch(openNewArticlesForm())} />
     </Card>
   );
 };

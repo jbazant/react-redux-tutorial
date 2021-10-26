@@ -7,7 +7,7 @@ const articlesListSelector = (articles) =>
 
 function mapStateToProps(state) {
   return {
-    data: articlesListSelector(state.articles),
+    data: articlesListSelector(state.get('articles')),
   };
 }
 
