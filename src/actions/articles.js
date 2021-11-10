@@ -1,5 +1,4 @@
-import { DELETE_ARTICLE } from '../constants/articles';
-import { CLOSE_FORM, OPEN_FORM } from '../constants/newArticleForm';
+import {ADD_ARTICLE, DELETE_ARTICLE} from '../constants/articles';
 
 export const deleteArticleByIndex = (articleIndex) => ({
   type: DELETE_ARTICLE,
@@ -8,10 +7,9 @@ export const deleteArticleByIndex = (articleIndex) => ({
   },
 });
 
-export const openNewArticlesForm = () => ({
-  type: OPEN_FORM,
-});
-
-export const closeNewArticlesForm = () => ({
-  type: CLOSE_FORM,
-});
+export const addArticle = (article) => ({
+  type: ADD_ARTICLE,
+  payload: {
+    article
+  }
+})

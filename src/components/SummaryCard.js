@@ -2,7 +2,7 @@ import { Button, Card, Text } from 'react-native-elements';
 import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { openNewArticlesForm } from '../actions/articles';
+import { openNewArticlesForm } from '../actions/newArticlesForm';
 
 export const SummaryCard = () => {
   const articlesCount = useSelector((state) => state.get('articles').size);

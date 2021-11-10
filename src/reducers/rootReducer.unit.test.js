@@ -1,11 +1,8 @@
 import { rootReducer } from './rootReducer';
-import {
-  closeNewArticlesForm,
-  deleteArticleByIndex,
-  openNewArticlesForm,
-} from '../actions/articles';
+import { addArticle, deleteArticleByIndex } from '../actions/articles';
 import { fromJS, List, Map } from 'immutable';
 import * as matchers from 'jest-immutable-matchers';
+import { closeNewArticlesForm, openNewArticlesForm, setLoading } from '../actions/newArticlesForm';
 
 describe('rootReducer', () => {
   beforeEach(function () {
@@ -16,7 +13,7 @@ describe('rootReducer', () => {
     expect(rootReducer(undefined, { type: 'NULL_ACTION' })).toEqualImmutable(
       fromJS({
         articles: ['item 1', 'item b'],
-        form: { inputText: '', isOpen: false },
+        form: { inputText: '', isOpen: false, isLoading: false },
       })
     );
   });
@@ -37,6 +34,14 @@ describe('rootReducer', () => {
     });
   });
 
+  describe('addArticle', () => {
+    it('should add article', () => {
+      const newState = rootReducer(undefined, addArticle('item c'));
+
+      expect(newState.get('articles')).toEqualImmutable(fromJS(['item 1', 'item b', 'item c']));
+    });
+  });
+
   describe('newArticleForm', () => {
     describe('OPEN_FORM action', () => {
       it('should open the form', () => {
@@ -44,11 +49,27 @@ describe('rootReducer', () => {
 
         expect(newState.getIn(['form', 'isOpen'])).toBe(true);
       });
+    });
 
+    describe('CLOSE_FORM action', () => {
       it('should close the form', () => {
         const newState = rootReducer(fromJS({ form: { isOpen: true } }), closeNewArticlesForm());
 
         expect(newState.getIn(['form', 'isOpen'])).toBe(false);
+      });
+    });
+
+    describe('SET_LOADING', () => {
+      it('should set loading to true', () => {
+        const newState = rootReducer(undefined, setLoading(true));
+
+        expect(newState.getIn(['form', 'isLoading'])).toBe(true);
+      });
+
+      it('should set loading to false', () => {
+        const newState = [setLoading(true), setLoading(false)].reduce(rootReducer, undefined);
+
+        expect(newState.getIn(['form', 'isLoading'])).toBe(false);
       });
     });
   });
