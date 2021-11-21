@@ -8,9 +8,9 @@
     "test": "jest"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.2",
     "expo": "~42.0.1",
     "expo-status-bar": "~1.0.4",
-    "immutable": "^4.0.0",
     "react": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
     "react-native-elements": "^3.4.2",
@@ -23,7 +23,6 @@
     "@testing-library/react-native": "^7.2.0",
     "eslint": "^7.32.0",
     "jest": "^27.1.1",
-    "jest-immutable-matchers": "^3.0.0",
     "prettier": "^2.4.0",
     "react-test-renderer": "^17.0.2"
   },
