@@ -1,37 +1,26 @@
 import { StyleSheet, View } from 'react-native';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { BottomSheet, Button, Card, Input } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeNewArticlesForm, setLoading } from '../actions/newArticlesForm';
-import { addArticle } from '../actions/articles';
+import {closeNewArticlesForm, findArticleOnServer, setLoading} from '../actions/newArticlesForm';
 
 export const NewArticleForm = () => {
   const isOpen = useSelector((state) => state.getIn(['form', 'isOpen']));
   const isLoading = useSelector((state) => state.getIn(['form', 'isLoading']));
 
+  const [articlePrefix, setArticlePrefix] = useState('');
+
   const dispatch = useDispatch();
-  const addArticleCallback = useCallback(async () => {
-    dispatch(setLoading(true));
-    try {
-      const response = await fetch('jirko dej mi pls url', {
-        method: 'GET',
-      });
-      const hopefullyAnArticle = response.json();
-      //dispatch(addArticle(hopefullyAnArticle));
-    } catch (e) {
-    } finally {
-      dispatch(setLoading(false));
-    }
-  }, []);
+  const addArticleCallback = useCallback(() => dispatch(findArticleOnServer(articlePrefix)), [articlePrefix]);
 
   const closeFormCallback = useCallback(() => {
     dispatch(closeNewArticlesForm());
-  },[]);
+  }, []);
 
   return (
     <BottomSheet isVisible={isOpen} containerStyle={{ backgroundColor: 'rgba(0.5, 0.25, 0, 0.2)' }}>
       <Card>
-        <Input label="Article" placeholder="Redux is coming!" />
+        <Input label="Article" placeholder="Redux is coming!" onChangeText={setArticlePrefix} />
         <View style={styles.buttons}>
           <Button
             containerStyle={styles.button}
@@ -43,7 +32,7 @@ export const NewArticleForm = () => {
             containerStyle={styles.button}
             title="Cancel"
             type="outline"
-            onPress={() => dispatch(closeNewArticlesForm())}
+            onPress={closeFormCallback}
           />
         </View>
       </Card>

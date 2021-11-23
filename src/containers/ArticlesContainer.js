@@ -3,7 +3,7 @@ import { Articles } from '../components/Articles';
 import { deleteArticleByIndex } from '../actions/articles';
 
 const articlesListSelector = (articles) =>
-  articles.map((article, index) => ({ key: article, title: article, index }));
+  articles.map((article, index) => ({ key: article, title: article, index })).toArray();
 
 function mapStateToProps(state) {
   return {
