@@ -1,5 +1,9 @@
-import { CLOSE_FORM, OPEN_FORM, SET_LOADING } from '../constants/newArticleForm';
-import { addArticle } from './articles';
+import {
+  CLOSE_FORM,
+  FIND_ARTICLE_ON_SERVER,
+  OPEN_FORM,
+  SET_LOADING,
+} from '../constants/newArticleForm';
 
 export const openNewArticlesForm = () => ({
   type: OPEN_FORM,
@@ -14,24 +18,17 @@ export const setLoading = (isLoading) => ({
   payload: { isLoading },
 });
 
-export const getFromServer = async (url, dispatch) => {
-  dispatch(setLoading(true));
-  try {
-    const response = await fetch(url, {
-      method: 'GET',
-    });
-    return await response.json();
-  } catch (e) {
-  } finally {
-    dispatch(setLoading(false));
-  }
-};
+export const findArticleOnServer = (articlePrefix) => ({
+  type: FIND_ARTICLE_ON_SERVER,
+  payload: { articlePrefix },
+});
+
 // TODO rewrite with sagas
-export const findArticleOnServer = (articlePrefix) => async (dispatch) => {
-  const { title } = await getFromServer(
-    `https://bazant.dev/tools/titles.php?prefix=${articlePrefix}`,
-    dispatch
-  );
-  dispatch(addArticle(title));
-  dispatch(closeNewArticlesForm());
-};
+// export const findArticleOnServer = (articlePrefix) => async (dispatch) => {
+//   const { title } = await getFromServer(
+//     `https://bazant.dev/tools/titles.php?prefix=${articlePrefix}`,
+//     dispatch
+//   );
+//   dispatch(addArticle(title));
+//   dispatch(closeNewArticlesForm());
+// };
