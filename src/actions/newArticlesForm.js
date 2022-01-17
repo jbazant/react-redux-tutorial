@@ -22,13 +22,3 @@ export const findArticleOnServer = (articlePrefix) => ({
   type: FIND_ARTICLE_ON_SERVER,
   payload: { articlePrefix },
 });
-
-// TODO rewrite with sagas
-// export const findArticleOnServer = (articlePrefix) => async (dispatch) => {
-//   const { title } = await getFromServer(
-//     `https://bazant.dev/tools/titles.php?prefix=${articlePrefix}`,
-//     dispatch
-//   );
-//   dispatch(addArticle(title));
-//   dispatch(closeNewArticlesForm());
-// };
