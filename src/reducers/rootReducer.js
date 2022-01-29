@@ -1,7 +1,5 @@
-import { ADD_ARTICLE, DELETE_ARTICLE } from '../constants/articles';
-import { fromJS } from 'immutable';
-import { CLOSE_FORM, OPEN_FORM, SET_LOADING } from '../constants/newArticleForm';
-
+// TODO note that this file is kept here just for reference and should be deleted in final version
+// also note that we have deleted all actions creators and "action type constants"
 const initialState = fromJS({
   articles: ['item 1', 'item b'],
   form: { inputText: '', isOpen: false, isLoading: false },

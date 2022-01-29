@@ -1,20 +1,20 @@
 import { connect } from 'react-redux';
 import { Articles } from '../components/Articles';
-import { deleteArticleByIndex } from '../actions/articles';
+import { deleteArticle } from "../reducers/articlesSlice";
 
 const articlesListSelector = (articles) =>
-  articles.map((article, index) => ({ key: article, title: article, index })).toArray();
+  articles.map((article, index) => ({ key: article, title: article, index }));
 
 function mapStateToProps(state) {
   return {
-    data: articlesListSelector(state.get('articles')),
+    data: articlesListSelector(state.articles.items),
   };
 }
 
 // this is equivalent to
-// (dispatch) => bindActionCreators({ deleteArticleByIndex }, dispatch);
+// (dispatch) => bindActionCreators({ deleteArticle }, dispatch);
 // and
-// (dispatch) => ({ deleteArticleByIndex: (...args) => dispatch(deleteArticleByIndex(...args)) });
-const mapsDispatchToProps = { deleteArticleByIndex };
+// (dispatch) => ({ deleteArticle: (...args) => dispatch(deleteArticle(...args)) });
+const mapsDispatchToProps = { deleteArticle };
 
 export const ArticlesContainer = connect(mapStateToProps, mapsDispatchToProps)(Articles);

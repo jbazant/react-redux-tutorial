@@ -2,19 +2,21 @@ import { StyleSheet, View } from 'react-native';
 import React, { useCallback, useState } from 'react';
 import { BottomSheet, Button, Card, Input } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
-import {closeNewArticlesForm, findArticleOnServer, setLoading} from '../actions/newArticlesForm';
+import { closeForm } from "../reducers/articlesSlice";
 
 export const NewArticleForm = () => {
-  const isOpen = useSelector((state) => state.getIn(['form', 'isOpen']));
-  const isLoading = useSelector((state) => state.getIn(['form', 'isLoading']));
+  const isOpen = useSelector((state) => state.articles.form.isOpen);
+  const isLoading = useSelector((state) => state.articles.form.isLoading);
 
   const [articlePrefix, setArticlePrefix] = useState('');
 
   const dispatch = useDispatch();
-  const addArticleCallback = useCallback(() => dispatch(findArticleOnServer(articlePrefix)), [articlePrefix]);
+
+  // TODO 05-toolkit - rewrite using createAsyncThunk https://redux-toolkit.js.org/api/createAsyncThunk
+  const addArticleCallback = useCallback(() => {}, []);
 
   const closeFormCallback = useCallback(() => {
-    dispatch(closeNewArticlesForm());
+    dispatch(closeForm());
   }, []);
 
   return (

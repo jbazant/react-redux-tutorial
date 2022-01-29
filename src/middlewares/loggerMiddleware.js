@@ -4,7 +4,7 @@ export const loggerMiddleware = store => next => action => {
         return next(action);
     }
 
-    console.group(action.type);
+    console.group(action);
     console.log('old state', store.getState());
     console.log('dispatching', action);
 

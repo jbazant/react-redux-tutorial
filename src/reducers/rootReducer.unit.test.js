@@ -1,13 +1,6 @@
-import { rootReducer } from './rootReducer';
-import { addArticle, deleteArticleByIndex } from '../actions/articles';
-import { fromJS, List, Map } from 'immutable';
-import * as matchers from 'jest-immutable-matchers';
-import { closeNewArticlesForm, openNewArticlesForm, setLoading } from '../actions/newArticlesForm';
+// TODO note that this file is kept here just for reference and should be deleted in final version
 
 describe('rootReducer', () => {
-  beforeEach(function () {
-    expect.extend(matchers);
-  });
 
   it('should have correct initial state', () => {
     expect(rootReducer(undefined, { type: 'NULL_ACTION' })).toEqualImmutable(

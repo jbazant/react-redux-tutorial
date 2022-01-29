@@ -1,12 +1,10 @@
-import { applyMiddleware, createStore } from 'redux';
-import { rootReducer } from '../reducers/rootReducer';
 import { loggerMiddleware } from '../middlewares/loggerMiddleware';
 import { censureMiddleware } from '../middlewares/censureMiddleware';
-import createSagaMiddleware from 'redux-saga';
+import { configureStore } from '@reduxjs/toolkit';
+import { articlesReducer } from '../reducers/articlesSlice';
 
-const sagaMiddleware = createSagaMiddleware();
-
-export const rootStore = createStore(
-  rootReducer,
-  applyMiddleware(loggerMiddleware, sagaMiddleware, censureMiddleware)
-);
+export const rootStore = configureStore({
+  reducer: { articles: articlesReducer },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat([loggerMiddleware, censureMiddleware]),
+});
