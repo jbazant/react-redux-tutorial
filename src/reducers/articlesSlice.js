@@ -10,11 +10,21 @@ export const articlesSlice = createSlice({
   name: 'articles',
   initialState,
   reducers: {
-    deleteArticle: state => {},
-    addArticle: state => {},
-    openForm: state => {},
-    closeForm: state => {},
-    setLoading: state => {},
+    deleteArticle: (state, {payload}) => {
+      state.items.splice(payload)
+    },
+    addArticle: (state, {payload}) => {
+      state.items.push(payload);
+    },
+    openForm: state => {
+      state.form.isOpen = true;
+    },
+    closeForm: state => {
+      state.form.isOpen = false;
+    },
+    setLoading: (state, {payload}) => {
+      state.form.isLoading = payload
+    },
   }
 });
 
