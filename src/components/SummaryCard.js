@@ -7,6 +7,7 @@ import { openForm } from "../reducers/articlesSlice";
 export const SummaryCard = () => {
   const articlesCount = useSelector((state) => state.articles.items.size);
   const dispatch = useDispatch();
+  // TODO 05-toolkit reselect
   return (
     <Card>
       <View style={styles.stats}>

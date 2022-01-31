@@ -1,4 +1,4 @@
-import { addArticle, articlesReducer, closeForm, deleteArticle, openForm, setLoading } from "./articlesSlice";
+import { addArticle, articlesReducer, closeForm, deleteArticle, openForm } from "./articlesSlice";
 
 describe('articlesSlices', () => {
   it('should have correct initial state', () => {
@@ -46,20 +46,6 @@ describe('articlesSlices', () => {
       const nextState = articlesReducer({ form: { isOpen: true } }, closeForm());
 
       expect(nextState.form.isOpen).toBe(false);
-    });
-  });
-
-  describe('setLoading', () => {
-    it('should set loading to true', () => {
-      const nextState = articlesReducer(undefined, setLoading(true));
-
-      expect(nextState.form.isLoading).toBe(true);
-    });
-
-    it('should set loading to false', () => {
-      const nextState = [setLoading(true), setLoading(false)].reduce(articlesReducer, undefined);
-
-      expect(nextState.form.isLoading).toBe(false);
     });
   });
 });
