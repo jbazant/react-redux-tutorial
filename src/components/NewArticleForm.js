@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import React, { useCallback, useState } from 'react';
 import { BottomSheet, Button, Card, Input } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeForm } from "../reducers/articlesSlice";
+import {closeForm, findArticleOnServer, getFromServer} from '../reducers/articlesSlice';
 
 export const NewArticleForm = () => {
   const isOpen = useSelector((state) => state.articles.form.isOpen);
@@ -13,7 +13,9 @@ export const NewArticleForm = () => {
   const dispatch = useDispatch();
 
   // TODO 05-toolkit - rewrite using createAsyncThunk https://redux-toolkit.js.org/api/createAsyncThunk
-  const addArticleCallback = useCallback(() => {}, []);
+  const addArticleCallback = useCallback(() => {
+    dispatch(findArticleOnServer(articlePrefix));
+  }, [articlePrefix]);
 
   const closeFormCallback = useCallback(() => {
     dispatch(closeForm());
