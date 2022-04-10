@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { BottomSheet, Button, Card, Input } from 'react-native-elements';
 
-export const NewArticleForm = ({ isVisible, setVisible }) => {
+export const NewArticleForm = ({ isVisible, toggleVisible }) => {
   return (
       <BottomSheet
         isVisible={isVisible}
@@ -11,12 +11,12 @@ export const NewArticleForm = ({ isVisible, setVisible }) => {
         <Card>
           <Input label="Article" placeholder="Redux is coming!"/>
           <View style={styles.buttons}>
-            <Button containerStyle={styles.button} title="Add" onPress={() => setVisible(false)} />
+            <Button containerStyle={styles.button} title="Add" onPress={() => toggleVisible()} />
             <Button
               containerStyle={styles.button}
               title="Cancel"
               type="outline"
-              onPress={() => setVisible(false)}
+              onPress={() => toggleVisible()}
             />
           </View>
         </Card>
